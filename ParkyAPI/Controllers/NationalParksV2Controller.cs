@@ -11,7 +11,9 @@ using ParkyAPI.Repository.IRepository;
 
 namespace ParkyAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v{version:apiVersion}/nationalparks")]
+    [ApiVersion("2.0")]
+    //[Route("api/[controller]")]
     [ApiController]
     //[ApiExplorerSettings(GroupName = "ParkyOpenAPISpecNP")]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -35,18 +37,9 @@ namespace ParkyAPI.Controllers
         [ProducesResponseType(400)]
         public IActionResult GetNationalParks()
         {
-            var objList = _npRepo.GetNationalParks();
-            var objDto = new List<NationalParkDto>();
-            foreach (var obj in objList)
-            {
-                objDto.Add(_mapper.Map<NationalParkDto>(obj));
-            }
+            var obj = _npRepo.GetNationalParks().FirstOrDefault();
 
-            //return Ok(objList);
-
-            return Ok(objDto);
+            return Ok(_mapper.Map<NationalParkDto>(obj));
         }
-
-        
     }
 }
