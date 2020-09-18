@@ -102,7 +102,8 @@ namespace ParkyAPI.Controllers
 
             //return Ok();
 
-            return CreatedAtRoute("GetNationalPark", new { nationalParkId = nationalParkObj.Id }, nationalParkObj);
+            return CreatedAtRoute("GetNationalPark", new { version = HttpContext.GetRequestedApiVersion().ToString(),
+                                                        nationalParkId = nationalParkObj.Id }, nationalParkObj);
         }
 
         [HttpPatch("{nationalParkId:int}", Name = "UpdateNationalPark")]
