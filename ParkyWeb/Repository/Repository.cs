@@ -37,30 +37,70 @@ namespace ParkyWeb.Repository
             {
                 return true;
             }
+            return false;
+        }
+
+        public async Task<bool> DeleteAsync(string url, int Id)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Delete, url + Id);
+
+            var client = _clientFactory.CreateClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync(string url)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            var client = _clientFactory.CreateClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<IEnumerable<T>>(jsonString);
+            }
+            return null;
+        }
+
+        public async Task<T> GetAsync(string url, int Id)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            var client = _clientFactory.CreateClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(jsonString);
+            }
+            return null;
+        }
+
+        public async Task<bool> UpdateAsync(string url, T objToUpdate)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Patch, url);
+            if (objToUpdate!= null)
+            {
+                request.Content = new StringContent(
+                    JsonConvert.SerializeObject(objToUpdate), Encoding.UTF8, "application/json");
+            }
             else
             {
                 return false;
             }
-        }
 
-        public Task<bool> DeleteAsync(string url, int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<T>> GetAllAsync(string url)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> GetAsync(string url, int Id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> UpdateAsync(string url, T objToUpdate)
-        {
-            throw new NotImplementedException();
+            var client = _clientFactory.CreateClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == System.Net.HttpStatusCode.NoContent)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
