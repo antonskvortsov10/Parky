@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ParkyWeb.Repository;
+using ParkyWeb.Repository.IRepository;
 
 namespace ParkyWeb
 {
@@ -24,6 +26,8 @@ namespace ParkyWeb
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddControllersWithViews();
+            services.AddScoped<INationalParkRepository, NationalParkRepository>();
+            services.AddScoped<ITrailRepository, TrailRepository>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddHttpClient();
         }
