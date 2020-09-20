@@ -15,7 +15,7 @@ function loadDataTable() {
             { "data": "nationalPark.name", "width": "25%" },
             { "data": "name", "width": "20%" },
             { "data": "distance", "width": "15%" },
-            { "data": "evelation", "width": "15%" },
+            { "data": "elevation", "width": "15%" },
             {
                 "data": "id",
                 "render": function (data) {
