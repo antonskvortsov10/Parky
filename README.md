@@ -9,4 +9,4 @@ This program is written using .NET Core.
 
 <p><strong>Parki API</strong></p>
 
-[![Watch the video](https://img.youtube.com/vi/Ycli8AjyoBI&t/hqdefault.jpg)](https://youtu.be/Ycli8AjyoBI)
+[![Watch the video](ParkyAPI.png)](https://www.youtube.com/watch?v=Ycli8AjyoBI)
