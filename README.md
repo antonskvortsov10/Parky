@@ -5,7 +5,7 @@ This program is written using ASP.NET Core (ASP.NET Core WebAPI and ASP.NET Core
 
 <hr>
 
-<p><h3>To see how this application works watch two demo videos below.</h3></p>
+<p><h3>To see how this web application works watch two demo videos below.</h3></p>
 
 <p><strong>Parki API:</strong></p>
 
